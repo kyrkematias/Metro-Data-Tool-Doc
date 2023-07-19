@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PDF Metro Data Tool</title>
+  <!-- Add Bootstrap CSS link -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Add custom CSS for dark mode -->
+  <style>
+    body {
+      background-color: #333;
+      color: #fff;
+      scroll-behavior: smooth;
+    }
+
+    .navbar {
+      background-color: #222;
+    }
+
+    .navbar .navbar-brand {
+      color: #fff;
+    }
+
+    .navbar .nav-link {
+      color: #fff;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      color: #fff;
+    }
+
+    section {
+      border-bottom: 1px solid #555;
+      padding-bottom: 20px;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navigation menu -->
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container space-between">
+    <img src="1.png" alt="" style="width: 90px;">  
+      <a class="navbar-brand" href="#top">PDF Metro Data Tool</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="#features">Features</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#usage">Usage</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#additional-info">Additional Information</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#notes">Notes</a>
+          </li>
+          <li>
+            <a class="nav-link" href="#improvements">Improvements</a>
+          </li>
+        </ul>
+      </div>
+      
+    </div>
+  </nav>
+
+  <div class="container mt-4">
+    <!-- Main content -->
+    <section id="top">
+      <h1>PDF Metro Data Tool</h1>
+      <p>
+        The PDF Metro Data Tool is a script that allows you to extract specific data from a PDF file and store it in an
+        Excel spreadsheet. It provides a graphical user interface (GUI) for easy interaction.
+      </p>
+    </section>
+
+    <hr>
+
+    <section id="features">
+      <h2>Features</h2>
+      <ol>
+        <li><strong>PDF File:</strong> The tool allows you to select a PDF file using a file dialog.</li>
+        <li><strong>Search Data:</strong> The tool searches for specific data within the selected PDF file, including meeting type,
+          meeting date, project names, applicants, project locations, parcel numbers, building sizes, land sizes,
+          proposals, existing/used information, propose zoning, and application status.</li>
+        <li><strong>Save Data in Template:</strong> The extracted data is also saved in a pre-defined template file named "COPIA
+          PLANTILLA.xlsx". The data is appended to the first available row in the template.</li>
+        <li><strong>Display Results:</strong> The tool displays the extracted data in the console for easy verification.</li>
+      </ol>
+    </section>
+
+    <hr>
+
+    <section id="usage">
+      <h2>Usage</h2>
+      <ol>
+        <li>The executable file already has the necessary dependencies installed: <code style="color: #ffb700;">`re`, `PyPDF2`, `openpyxl`,
+            `tkinter`, `pdfplumber`.</code></li>
+        <li>Ensure that you have the following additional files in the same directory as the script:
+          <ul>
+            <li><code style="color: #ffb700;">`COPIA PLANTILLA.xlsx`</code>: Template file.</li>
+          </ul>
+        </li>
+        <li>Run the script using the executable file.</li>
+        <li>The graphical user interface (GUI) will appear.</li>
+        <li>Click the Search button to select a PDF file. This tool only grabs information from PDF files with selectable text inside. You can only select one file at a time. If you need to analyze multiple files, wait until the data collection is done.</li>
+        <li>The tool will search for the specified data within the PDF file and display the results in the console.</li>
+        <li>The extracted data will be appended to the template file <code style="color: #ffb700;">`COPIA PLANTILLA.xlsx`</code>.</li>
+        <li>After the process is complete, a message will be displayed in the GUI with the total execution time.</li>
+        <li>You can use the tool again once the previous PDF is already done.</li>
+        <li>Validate or erase the information loaded in 'COPIA PLANTILLA' file.</li>
+      </ol>
+    </section>
+
+    <hr>
+
+    <section id="additional-info">
+      <h2>Additional Information</h2>
+      <ul>
+        <li>The script uses regular expressions to search for specific patterns in the extracted text from the PDF file.</li>
+        <li>The script assumes a specific format for the data, such as date formats, project name formats, parcel number formats, etc. Ensure that the PDF files being processed adhere to these formats for accurate results.</li>
+        <li>The script relies on the availability and accuracy of the data within the PDF file. Inaccurate or missing data may lead to incorrect or incomplete results.</li>
+        <li>The script includes pre-defined phrases that are excluded from the applicant names. Modify the excluded_phrases.py file to adjust the list of excluded phrases according to your requirements.</li>
+        <li>The script uses the pdfplumber library to extract text from PDF files.</li>
+      </ul>
+    </section>
+
+    <hr>
+
+    <section id="notes">
+      <h2>Notes</h2>
+      <hr>
+      <h3>There are some troubles you can find using this tool</h3>
+      <ul>
+        <li>Some patterns of applicants with uppercase words are not recognized by the model. Some company names or real people's names that begin with a title, such as 'D.R. John,' are not recognized. Some documents may include a pattern in the redaction that this tool recognize as a name and surname, for example 'City Of'.</li>
+        <li>Some locations may be incomplete or lack reference.</li>
+        <li>Some 'Building Size' and 'Land Size' values are not recognized by the model, despipassing the RegEx recognition tests.</li>
+        <li>The 'Current Application Status' only recognizes when the document specifies 'Accepted' or 'Rejected'.</li>
+        <li>he propose zone only recognizes when the document specifies it. Still needs validation.</li>
+        <li>The tool <strong>only collect data if it's specified</strong> in the document. Using this tool dont't replace human validation.</li>
+        <li>In some cities you need to use all the documents attached to the agenda and minutes to complement missing information. This tool can extract information of multiple documents (PDF only).</li>
+      </ul>
+    </section>
+    <hr>
+    <section id="improvements">
+        <h2>Improvements for future versions:</h2>
+        <hr>
+        <ul>
+            <li>Enhancement in the filtering of relevant projects and their information (currently, data is collected indiscriminately, regardless of the size or importance of the project).</li>
+            <li>Improvement in the algorithm for extracting applicant names (currently, there are phrases included as names due to the format).</li>
+            <li>Enhancement in the extraction of project proposals (currently, some proposals are incomplete or not recognized due to their pattern within the document).</li>
+            <li>Improvement in the extraction of project names (currently, all names that match the pattern are included in the results, regardless of their priority or size).</li>
+            <li>Implementation of an automatic update system. This way, future updates with new improvements do not need to be downloaded manually.</li>
+        </ul>
+    </section>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
